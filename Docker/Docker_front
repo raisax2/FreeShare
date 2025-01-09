@@ -1,0 +1,27 @@
+# Frontend Dockerfile
+
+# Use the official Node.js image
+FROM node:14
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json from the frontend folder
+COPY ../frontend/package.json ../frontend/package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code from the frontend folder to the container
+COPY ../frontend . 
+
+# Build the React app
+RUN npm run build
+
+# Expose port 3000 for the React application
+EXPOSE 3000
+
+# Start the React app
+CMD ["npm", "start"]
+
+
